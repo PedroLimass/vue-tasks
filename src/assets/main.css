@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+@import './base.css';
+
+/* Paleta e tipografia no modelo Tailwind v4 (substitui tailwind.config.js) */
+@theme {
+  --font-sans:
+    'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --color-rocket-purple-400: #9b7aed;
+  --color-rocket-purple-500: #8257e6;
+  --color-rocket-purple-600: #6b46c1;
+
+  --color-rocket-green-500: #04d361;
+
+  --color-rocket-gray-50: #f8f8f8;
+  --color-rocket-gray-100: #e1e1e6;
+  --color-rocket-gray-200: #a8a8b3;
+  --color-rocket-gray-300: #737380;
+  --color-rocket-gray-600: #505059;
+  --color-rocket-gray-800: #28282e;
+  --color-rocket-gray-850: #1f2729;
+  --color-rocket-gray-900: #121214;
+}
+
+/* Tema escuro manual: classe .dark no <html> (alinhado ao useTheme + script em index.html) */
+@custom-variant dark (&:where(.dark, .dark *));
