@@ -1,11 +1,47 @@
+html,
 body {
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-* {
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-rocket-gray-50);
+  color: var(--color-rocket-gray-900);
+}
+
+html.dark body {
+  background-color: var(--color-rocket-gray-900);
+  color: var(--color-rocket-gray-100);
+}
+
+/* Transição apenas no troca de tema, aplicada via classes, evitando custo em toda interação */
+.theme-transition,
+.theme-transition * {
   transition:
-    background-color 0.2s,
-    border-color 0.2s,
-    color 0.2s;
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    fill 200ms ease,
+    stroke 200ms ease;
+}
+
+/* Anel de foco acessível padrão */
+:focus-visible {
+  outline: 2px solid var(--color-rocket-purple-500);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respeita usuários com preferência por menos animação */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -1,32 +1,36 @@
 import { onMounted, ref } from 'vue'
 
+const STORAGE_KEY = 'theme'
+const DARK_CLASS = 'dark'
+
 export function useTheme() {
   const isDark = ref(false)
 
-  const toggleTheme = () => {
-    isDark.value = !isDark.value
-
-    if (isDark.value) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
-      return
+  const applyTheme = (dark: boolean): void => {
+    isDark.value = dark
+    const root = document.documentElement
+    if (dark) {
+      root.classList.add(DARK_CLASS)
+    } else {
+      root.classList.remove(DARK_CLASS)
     }
-    document.documentElement.classList.remove('dark')
-    localStorage.setItem('theme', 'light')
   }
 
-  const initializeTheme = () => {
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+  const toggleTheme = (): void => {
+    const next = !isDark.value
+    applyTheme(next)
+    localStorage.setItem(STORAGE_KEY, next ? 'dark' : 'light')
+  }
 
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+  const initializeTheme = (): void => {
+    if (document.documentElement.classList.contains(DARK_CLASS)) {
       isDark.value = true
-      document.documentElement.classList.add('dark')
       return
     }
 
-    isDark.value = false
-    document.documentElement.classList.remove('dark')
+    const savedTheme = localStorage.getItem(STORAGE_KEY)
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    applyTheme(savedTheme === 'dark' || (!savedTheme && prefersDark))
   }
 
   onMounted(() => {
