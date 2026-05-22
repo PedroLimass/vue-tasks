@@ -91,20 +91,9 @@
 
           <template v-if="!isAuthenticated">
             <MenuItem redirect-to="/login" title="Login" full-width @click="closeMenu" />
-            <MenuItem
-              redirect-to="/register"
-              title="Cadastre-se"
-              full-width
-              @click="closeMenu"
-            />
+            <MenuItem redirect-to="/register" title="Cadastre-se" full-width @click="closeMenu" />
           </template>
-          <MenuItem
-            v-else
-            redirect-to="/tasks"
-            title="Tarefas"
-            full-width
-            @click="closeMenu"
-          />
+          <MenuItem v-else redirect-to="/tasks" title="Tarefas" full-width @click="closeMenu" />
 
           <button
             v-if="isAuthenticated"
